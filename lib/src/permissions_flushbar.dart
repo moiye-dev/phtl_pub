@@ -1,31 +1,27 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-class PermissionsFlushbar extends StatelessWidget {
-  final String title;
-  final String message;
-  final Duration duration;
-  final IconData iconData;
-  final TextButton? actionButton;
+typedef Callback = Function(bool?);
 
-  const PermissionsFlushbar({
+noop(bool? b) {}
+
+class PermissionsFlushbar {
+  static void display({
     Key? key,
     required BuildContext context,
-    this.title = "",
-    this.message = "",
-    this.duration = const Duration(seconds: 3),
-    this.iconData = Icons.warning,
-    this.actionButton,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Flushbar<bool>? flush;
-    flush = Flushbar<bool>(
+    String? title = "",
+    String? message = "",
+    Duration? duration = const Duration(seconds: 3),
+    IconData? iconData = Icons.warning,
+    String? buttonText = "",
+    Callback? onClick = noop,
+  }) {
+    Flushbar<bool>? flushbar;
+    flushbar = Flushbar<bool>(
       margin: const EdgeInsets.all(8),
       titleText:
-          Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-      messageText: Text(message),
+          Text(title!, style: const TextStyle(fontWeight: FontWeight.bold)),
+      messageText: Text(message!),
       icon: Icon(
         iconData,
         size: 28.0,
@@ -36,10 +32,18 @@ class PermissionsFlushbar extends StatelessWidget {
       backgroundColor: Theme.of(context).cardColor,
       borderRadius: const BorderRadius.all(Radius.circular(4)),
       mainButton: Visibility(
-        visible: actionButton != null,
-        child: actionButton!,
+        visible: onClick != noop,
+        child: TextButton(
+          onPressed: () {
+            flushbar?.dismiss(true); // result = true
+          },
+          child: Text(
+            buttonText ?? "",
+            style: const TextStyle(color: Colors.blue),
+          ),
+        ),
       ),
     );
-    return flush;
+    flushbar.show(context).then(onClick!);
   }
 }
