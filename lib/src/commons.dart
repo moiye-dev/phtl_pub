@@ -31,4 +31,10 @@ class Commons {
       ],
     );
   }
+
+  static final Commons _instance = Commons._internal();
+  factory Commons() {
+    return _instance;
+  }
+  Commons._internal();
 }
