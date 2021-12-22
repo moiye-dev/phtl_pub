@@ -9,6 +9,7 @@ class PermissionsFlushbar {
   static void display({
     Key? key,
     required BuildContext context,
+    Color? backgroundColor,
     String? title = "",
     String? message = "",
     Duration? duration = const Duration(seconds: 3),
@@ -16,7 +17,9 @@ class PermissionsFlushbar {
     String? buttonText = "",
     Callback? onClick = noop,
   }) {
+    backgroundColor ??= Theme.of(context).cardColor;
     Flushbar<bool>? flushbar;
+
     flushbar = Flushbar<bool>(
       margin: const EdgeInsets.all(8),
       titleText:
@@ -29,7 +32,7 @@ class PermissionsFlushbar {
       ),
       duration: duration,
       leftBarIndicatorColor: Colors.red[300],
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: backgroundColor,
       borderRadius: const BorderRadius.all(Radius.circular(4)),
       mainButton: Visibility(
         visible: onClick != noop,
