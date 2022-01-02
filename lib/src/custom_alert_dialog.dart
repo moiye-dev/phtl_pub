@@ -40,7 +40,7 @@ class CustomAlertDialog extends StatelessWidget {
             primary: const ColorScheme.light().primary,
           ),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(false);
             onNegativePressed();
           },
         ),
@@ -48,7 +48,7 @@ class CustomAlertDialog extends StatelessWidget {
           child: Text(positiveBtnText,
               style: const TextStyle(color: Colors.white)),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
             onPostivePressed();
           },
         ),
