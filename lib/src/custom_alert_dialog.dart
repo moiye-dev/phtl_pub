@@ -37,7 +37,7 @@ class CustomAlertDialog extends StatelessWidget {
           child: Text(negativeBtnText,
               style: const TextStyle(color: Colors.white)),
           style: ElevatedButton.styleFrom(
-            primary: const ColorScheme.light().primary,
+            primary: Colors.blue[300],
           ),
           onPressed: () {
             Navigator.of(context).pop(false);
@@ -47,6 +47,9 @@ class CustomAlertDialog extends StatelessWidget {
         ElevatedButton(
           child: Text(positiveBtnText,
               style: const TextStyle(color: Colors.white)),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue[300],
+          ),
           onPressed: () {
             Navigator.of(context).pop(true);
             onPostivePressed();
