@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BorderedLabel extends StatelessWidget {
+  final double? topPadding;
   final String label;
   final TextStyle? labelStyle;
   final double labelPadding;
@@ -16,6 +17,7 @@ class BorderedLabel extends StatelessWidget {
 
   const BorderedLabel({
     Key? key,
+    this.topPadding = 8.0,
     required this.label,
     this.labelStyle,
     this.labelPadding = 16.0,
@@ -35,7 +37,7 @@ class BorderedLabel extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: EdgeInsets.only(top: topPadding!),
           child: Container(
             decoration: BoxDecoration(
               border: showLabelBorder
@@ -60,7 +62,7 @@ class BorderedLabel extends StatelessWidget {
         ),
         Positioned(
             top: -1,
-            left: 18,
+            left: labelPadding,
             child: Container(
               decoration: BoxDecoration(
                 color:
@@ -72,7 +74,8 @@ class BorderedLabel extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                padding:
+                    EdgeInsets.symmetric(horizontal: showLabelBorder ? 4.0 : 0),
                 child: hint != null
                     ? Text(
                         hint!,
