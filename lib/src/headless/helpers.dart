@@ -11,7 +11,6 @@ class Helpers {
   }
 
   Future<void> initPlatformState() async {
-    await dotenv.load();
     OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
     String? appId = dotenv.env['AppId'];
     print("appId=$appId");
