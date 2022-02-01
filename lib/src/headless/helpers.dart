@@ -13,7 +13,6 @@ class Helpers {
   Future<void> initPlatformState() async {
     OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
     String? appId = dotenv.env['AppId'];
-    print("appId=$appId");
     await OneSignal.shared.setAppId(appId ?? "");
 
     //iOS requires users consent for notifications
