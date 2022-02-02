@@ -4,8 +4,11 @@ class Commons {
   Widget compoundTitle({
     required BuildContext context,
     required String title,
+    String? subTitle,
     Icon? icon = const Icon(Icons.home),
     TextStyle? style,
+    TextStyle? subTitleStyle =
+        const TextStyle(color: Colors.white, fontSize: 14),
     int? level = 3,
   }) {
     Widget backBtn = const SizedBox.shrink();
@@ -24,10 +27,27 @@ class Commons {
             Navigator.popUntil(context, (route) => _level-- == 1);
           },
         ),
-        Expanded(
-          child: Center(
-              child: Text(title, style: style)), //tr('General.All Defects')
-        ),
+        subTitle == null
+            ? Expanded(
+                child: Center(child: Text(title, style: style)),
+              )
+            : Expanded(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(title, style: style),
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    Center(
+                      child: Text(subTitle,
+                          overflow: TextOverflow.ellipsis,
+                          style: subTitleStyle),
+                    ),
+                  ],
+                ),
+              ),
       ],
     );
   }
