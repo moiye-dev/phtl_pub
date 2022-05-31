@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 typedef Callback = Function(bool?);
-
+typedef StatusChangeCallback = Function(FlushbarStatus?);
 noop(bool? b) {}
 
 class PermissionsFlushbar {
@@ -16,6 +16,7 @@ class PermissionsFlushbar {
     IconData? iconData = Icons.warning,
     String? buttonText = "",
     Callback? onClick = noop,
+    StatusChangeCallback? statusChangeCallback,
   }) {
     backgroundColor ??= Theme.of(context).cardColor;
     Flushbar<bool>? flushbar;
@@ -30,6 +31,7 @@ class PermissionsFlushbar {
         size: 28.0,
         color: Colors.red[300],
       ),
+      onStatusChanged: statusChangeCallback,
       duration: duration,
       leftBarIndicatorColor: Colors.red[300],
       backgroundColor: backgroundColor,
